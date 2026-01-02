@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* Custom utilities for CV Builder */
+@layer utilities {
+  .cv-section {
+    @apply p-4 border border-gray-200 rounded-lg shadow-sm;
+  }
+}

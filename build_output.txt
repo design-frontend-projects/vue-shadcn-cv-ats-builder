@@ -1,0 +1,58 @@
+
+> @ build E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder
+> vite build
+
+X [ERROR] "@tailwindcss/vite" resolved to an ESM file. ESM file cannot be loaded by `require`. See https://vite.dev/guide/troubleshooting.html#this-package-is-esm-only for more details. [plugin externalize-deps]
+
+    node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:27:
+      1225 │         let result = await callback({
+           ╵                            ^
+
+    at file:///E:/web-projects/web-mobile-work-apps/vue-shadcn-cv-ats-builder/node_modules/.pnpm/vite@5.4.21_lightningcss@1.30.2_stylus@0.57.0/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:66928:23
+    at requestCallbacks.on-resolve (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:1225:28)
+    at handleRequest (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:647:17)
+    at handleIncomingPacket (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:672:7)
+    at Socket.readFromStdout (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:600:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+
+  This error came from the "onResolve" callback registered here:
+
+    node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1150:20:
+      1150 │       let promise = setup({
+           ╵                     ^
+
+    at setup (file:///E:/web-projects/web-mobile-work-apps/vue-shadcn-cv-ats-builder/node_modules/.pnpm/vite@5.4.21_lightningcss@1.30.2_stylus@0.57.0/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:66890:18)
+    at handlePlugins (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:1150:21)
+    at buildOrContextImpl (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:873:5)
+    at Object.buildOrContext (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:699:5)
+    at E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:2023:15
+    at new Promise (<anonymous>)
+    at Object.build (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:2022:25)
+    at build (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:1873:51)
+    at bundleConfigFile (file:///E:/web-projects/web-mobile-work-apps/vue-shadcn-cv-ats-builder/node_modules/.pnpm/vite@5.4.21_lightningcss@1.30.2_stylus@0.57.0/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:66845:24)
+
+  The plugin "externalize-deps" was triggered by this import
+
+    vite.config.ts:3:24:
+      3 │ import tailwindcss from "@tailwindcss/vite";
+        ╵                         ~~~~~~~~~~~~~~~~~~~
+
+[31mfailed to load config from E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\vite.config.ts[39m
+[31merror during build:
+Error: Build failed with 1 error:
+node_modules/.pnpm/esbuild@0.21.5/node_modules/esbuild/lib/main.js:1225:27: ERROR: [plugin: externalize-deps] "@tailwindcss/vite" resolved to an ESM file. ESM file cannot be loaded by `require`. See https://vite.dev/guide/troubleshooting.html#this-package-is-esm-only for more details.
+    at failureErrorWithLog (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:1472:15)
+    at E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:945:25
+    at runOnEndCallbacks (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:1315:45)
+    at buildResponseToResult (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:943:7)
+    at E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:970:16
+    at responseCallbacks.<computed> (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:622:9)
+    at handleIncomingPacket (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:677:12)
+    at Socket.readFromStdout (E:\web-projects\web-mobile-work-apps\vue-shadcn-cv-ats-builder\node_modules\.pnpm\esbuild@0.21.5\node_modules\esbuild\lib\main.js:600:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)[39m
+ ELIFECYCLE  Command failed with exit code 1.
