@@ -56,6 +56,20 @@
           placeholder="New York, USA"
         />
       </div>
+      <div class="space-y-2">
+        <Label>LinkedIn</Label>
+        <Input
+          v-model="cvStore.cv.personalInfo.linkedin"
+          placeholder="https://linkedin.com/..."
+        />
+      </div>
+      <div class="space-y-2">
+        <Label>GitHub</Label>
+        <Input
+          v-model="cvStore.cv.personalInfo.github"
+          placeholder="https://github.com/..."
+        />
+      </div>
     </div>
 
     <!-- Work Experience Form -->
@@ -80,14 +94,14 @@
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-2">
           <Label>Start Date</Label>
-          <Input
+          <DatePicker
             v-model="cvStore.cv.workExperiences[index].startDate"
-            placeholder="MM/YYYY"
+            placeholder="Pick a date"
           />
         </div>
         <div class="space-y-2">
           <Label>End Date</Label>
-          <Input
+          <DatePicker
             v-model="cvStore.cv.workExperiences[index].endDate"
             placeholder="Present"
           />
@@ -124,11 +138,11 @@
       <div class="grid grid-cols-2 gap-4">
         <div class="space-y-2">
           <Label>Start Date</Label>
-          <Input v-model="cvStore.cv.education[index].startDate" />
+          <DatePicker v-model="cvStore.cv.education[index].startDate" />
         </div>
         <div class="space-y-2">
           <Label>End Date</Label>
-          <Input v-model="cvStore.cv.education[index].endDate" />
+          <DatePicker v-model="cvStore.cv.education[index].endDate" />
         </div>
       </div>
     </div>
@@ -193,6 +207,7 @@ import Button from "@/components/ui/Button.vue";
 import Input from "@/components/ui/Input.vue";
 import Label from "@/components/ui/Label.vue";
 import Textarea from "@/components/ui/Textarea.vue";
+import DatePicker from "@/components/ui/DatePicker.vue";
 
 const props = defineProps<{
   sectionId: string;

@@ -23,7 +23,15 @@ export const useCVStore = defineStore("cv", () => {
   const cv = ref<CVData>(
     loadFromStorage() || {
       templateId: "default",
-      personalInfo: { fullName: "", email: "" },
+      personalInfo: {
+        fullName: "",
+        email: "",
+        phone: "",
+        address: "",
+        linkedin: "",
+        github: "",
+      },
+      summary: "",
       workExperiences: [],
       education: [],
       skills: [],

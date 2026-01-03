@@ -14,7 +14,7 @@
       <div
         class="bg-white shadow-sm border border-gray-200 mx-auto max-w-[21cm] min-h-[29.7cm] p-[2cm] text-gray-800"
         :style="{
-          fontFamily: cvStore.cv.theme?.fontFamily || 'Inter, sans-serif',
+          fontFamily: cv.theme?.fontFamily || 'Inter, sans-serif',
         }"
       >
         <!-- Header -->
@@ -22,42 +22,33 @@
           <h1
             class="text-4xl font-extrabold uppercase tracking-widest text-primary mb-2"
           >
-            {{ cvStore.cv.personalInfo.fullName || "YOUR NAME" }}
+            {{ cv.personalInfo.fullName || "YOUR NAME" }}
           </h1>
           <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600">
-            <span
-              v-if="cvStore.cv.personalInfo.email"
-              class="flex items-center"
-            >
+            <span v-if="cv.personalInfo.email" class="flex items-center">
               <span class="font-semibold mr-1">Email:</span>
-              {{ cvStore.cv.personalInfo.email }}
+              {{ cv.personalInfo.email }}
             </span>
-            <span
-              v-if="cvStore.cv.personalInfo.phone"
-              class="flex items-center"
-            >
+            <span v-if="cv.personalInfo.phone" class="flex items-center">
               <span class="font-semibold mr-1">Phone:</span>
-              {{ cvStore.cv.personalInfo.phone }}
+              {{ cv.personalInfo.phone }}
             </span>
-            <span
-              v-if="cvStore.cv.personalInfo.address"
-              class="flex items-center"
-            >
+            <span v-if="cv.personalInfo.address" class="flex items-center">
               <span class="font-semibold mr-1">Address:</span>
-              {{ cvStore.cv.personalInfo.address }}
+              {{ cv.personalInfo.address }}
             </span>
           </div>
           <div class="flex flex-wrap gap-4 mt-2 text-sm text-primary">
             <a
-              v-if="cvStore.cv.personalInfo.linkedin"
-              :href="cvStore.cv.personalInfo.linkedin"
+              v-if="cv.personalInfo.linkedin"
+              :href="cv.personalInfo.linkedin"
               target="_blank"
               class="hover:underline"
               >LinkedIn</a
             >
             <a
-              v-if="cvStore.cv.personalInfo.github"
-              :href="cvStore.cv.personalInfo.github"
+              v-if="cv.personalInfo.github"
+              :href="cv.personalInfo.github"
               target="_blank"
               class="hover:underline"
               >GitHub</a
@@ -66,26 +57,26 @@
         </header>
 
         <!-- Summary -->
-        <section v-if="cvStore.cv.summary" class="mb-6">
+        <section v-if="cv.summary" class="mb-6">
           <h2
             class="text-lg font-bold border-b border-gray-300 mb-2 uppercase text-primary"
           >
             Professional Summary
           </h2>
           <p class="text-sm leading-relaxed text-justify">
-            {{ cvStore.cv.summary }}
+            {{ cv.summary }}
           </p>
         </section>
 
         <!-- Experience -->
-        <section v-if="cvStore.cv.workExperiences.length" class="mb-6">
+        <section v-if="cv.workExperiences.length" class="mb-6">
           <h2
             class="text-lg font-bold border-b border-gray-300 mb-3 uppercase text-primary"
           >
             Work Experience
           </h2>
           <div
-            v-for="(exp, index) in cvStore.cv.workExperiences"
+            v-for="(exp, index) in cv.workExperiences"
             :key="index"
             class="mb-4 last:mb-0"
           >
@@ -113,14 +104,14 @@
         </section>
 
         <!-- Education -->
-        <section v-if="cvStore.cv.education.length" class="mb-6">
+        <section v-if="cv.education.length" class="mb-6">
           <h2
             class="text-lg font-bold border-b border-gray-300 mb-3 uppercase text-primary"
           >
             Education
           </h2>
           <div
-            v-for="(edu, index) in cvStore.cv.education"
+            v-for="(edu, index) in cv.education"
             :key="index"
             class="mb-3 last:mb-0"
           >
@@ -145,20 +136,20 @@
         </section>
 
         <!-- Skills -->
-        <section v-if="cvStore.cv.skills.length" class="mb-6">
+        <section v-if="cv.skills.length" class="mb-6">
           <h2
             class="text-lg font-bold border-b border-gray-300 mb-2 uppercase text-primary"
           >
-            Skills
+            Skills Preview
           </h2>
           <div class="flex flex-wrap gap-2">
             <span
-              v-for="(skill, index) in cvStore.cv.skills"
+              v-for="(skill, index) in cv.skills"
               :key="index"
               class="px-2 py-0.5 bg-gray-100 border border-gray-200 text-xs font-semibold rounded"
             >
-              {{ skill.name
-              }}<span v-if="skill.level" class="ml-1 text-gray-400"
+              {{ skill.name }}
+              <span v-if="skill.level" class="ml-1 text-gray-400"
                 >({{ skill.level }}/5)</span
               >
             </span>
@@ -166,14 +157,14 @@
         </section>
 
         <!-- Projects -->
-        <section v-if="cvStore.cv.projects.length" class="mb-6">
+        <section v-if="cv.projects.length" class="mb-6">
           <h2
             class="text-lg font-bold border-b border-gray-300 mb-3 uppercase text-primary"
           >
             Projects
           </h2>
           <div
-            v-for="(project, index) in cvStore.cv.projects"
+            v-for="(project, index) in cv.projects"
             :key="index"
             class="mb-3 last:mb-0"
           >
@@ -200,7 +191,7 @@
 
         <!-- Custom Sections -->
         <section
-          v-for="(section, index) in cvStore.cv.customSections"
+          v-for="(section, index) in cv.customSections"
           :key="index"
           class="mb-6"
         >
@@ -228,12 +219,23 @@
 
 <script setup lang="ts">
 import { useCVStore } from "@/stores/cvStore";
+import { storeToRefs } from "pinia";
 import Button from "@/components/ui/Button.vue";
+import { watch } from "vue";
 
 const cvStore = useCVStore();
+const { cv } = storeToRefs(cvStore);
+
+watch(
+  () => cv.value,
+  (newVal) => {
+    console.log("CV Data Changed:", newVal);
+  },
+  { deep: true }
+);
 
 function downloadJSON() {
-  const data = JSON.stringify(cvStore.cv, null, 2);
+  const data = JSON.stringify(cv.value, null, 2);
   const blob = new Blob([data], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
