@@ -1,14 +1,53 @@
 <template>
   <div class="space-y-4">
     <!-- Add Section Controls -->
-    <div class="flex items-center space-x-2">
-      <select v-model="newSectionType" class="rounded border p-1">
-        <option disabled value="">Add Section...</option>
-        <option v-for="type in availableSectionTypes" :key="type" :value="type">
-          {{ sectionLabels[type] || type }}
-        </option>
-      </select>
-      <Button @click="addSection" :disabled="!newSectionType">Add</Button>
+    <div
+      class="flex flex-wrap items-center gap-3 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-100 dark:border-gray-800"
+    >
+      <div class="flex items-center space-x-2">
+        <select
+          v-model="newSectionType"
+          class="rounded-lg border border-gray-200 dark:border-gray-700 p-2 bg-white dark:bg-gray-800 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+        >
+          <option disabled value="">Add Section...</option>
+          <option
+            v-for="type in availableSectionTypes"
+            :key="type"
+            :value="type"
+          >
+            {{ sectionLabels[type] || type }}
+          </option>
+        </select>
+        <Button
+          @click="addSection"
+          :disabled="!newSectionType"
+          variant="outline"
+          size="sm"
+        >
+          + Add Custom
+        </Button>
+      </div>
+
+      <div class="h-6 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block"></div>
+
+      <div class="flex items-center gap-2">
+        <Button
+          @click="quickAdd('workExperiences')"
+          variant="outline"
+          size="sm"
+          class="bg-blue-50 text-blue-600 hover:bg-blue-100 border-blue-100 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800"
+        >
+          <span class="mr-1.5">💼</span> Add Experience
+        </Button>
+        <Button
+          @click="quickAdd('skills')"
+          variant="outline"
+          size="sm"
+          class="bg-purple-50 text-purple-600 hover:bg-purple-100 border-purple-100 dark:bg-purple-900/20 dark:text-purple-400 dark:border-purple-800"
+        >
+          <span class="mr-1.5">⚡</span> Add Skill
+        </Button>
+      </div>
     </div>
 
     <!-- Section List (Drag-and-Drop placeholder) -->
@@ -78,6 +117,11 @@ const sectionOrder = computed(() => {
   return order;
 });
 
+function quickAdd(type: string) {
+  newSectionType.value = type;
+  addSection();
+}
+
 function addSection() {
   const type = newSectionType.value as keyof typeof cvStore.cv;
   if (!type) return;
@@ -92,6 +136,7 @@ function addSection() {
         position: "",
         location: "",
         startDate: "",
+        endDate: "",
         description: "",
       });
       break;
@@ -101,13 +146,14 @@ function addSection() {
         degree: "",
         location: "",
         startDate: "",
+        endDate: "",
       });
       break;
     case "skills":
-      cvStore.cv.skills.push({ name: "" });
+      cvStore.cv.skills.push({ name: "", level: 3 });
       break;
     case "projects":
-      cvStore.cv.projects.push({ name: "", description: "" });
+      cvStore.cv.projects.push({ name: "", description: "", link: "" });
       break;
     case "certifications":
       cvStore.cv.certifications.push({ name: "", issuer: "" });
